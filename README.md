@@ -5,9 +5,9 @@
 var queue = TinyQueue();
 
 // add some items
-queue.add(7);
-queue.add(5);
-queue.add(10);
+queue.push(7);
+queue.push(5);
+queue.push(10);
 
 // remove the top item
 var top = queue.pop(); // returns 5
