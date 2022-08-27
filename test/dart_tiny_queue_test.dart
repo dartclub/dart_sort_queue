@@ -15,14 +15,14 @@ void main() {
       test(
         'maintains a priority queue',
         () {
-          var queue = TinyQueue();
+          var queue = TinyQueue([]);
           for (var i = 0; i < data.length; i++) {
             queue.push(data[i]);
           }
           expect(queue.peek() == sorted[0], isTrue);
 
           var result = [];
-          while (queue.data!.isNotEmpty) {
+          while (queue.isNotEmpty) {
             result.add(queue.pop());
           }
 
@@ -33,10 +33,10 @@ void main() {
       test(
         'accepts data in constructor',
         () {
-          var queue = TinyQueue(data: [...data]);
+          var queue = TinyQueue([...data]);
 
           var result = [];
-          while (queue.data!.isNotEmpty) {
+          while (queue.isNotEmpty) {
             result.add(queue.pop());
           }
 
@@ -47,7 +47,7 @@ void main() {
       test(
         'handles edge cases with few elements',
         () {
-          var queue = TinyQueue();
+          var queue = TinyQueue([]);
 
           queue.push(2);
           queue.push(1);
@@ -65,9 +65,9 @@ void main() {
       test(
         'handles init with empty array',
         () {
-          var queue = TinyQueue(data: []);
+          var queue = TinyQueue([]);
 
-          expect(queue.data, equals([]));
+          expect(queue, equals([]));
         },
       );
     },

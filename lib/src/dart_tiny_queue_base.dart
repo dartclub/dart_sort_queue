@@ -1,29 +1,31 @@
-class TinyQueue {
-  late List<dynamic>? data;
+class TinyQueue<T> extends Iterable {
+  late List<T> _data;
   final Function compare;
 
-  TinyQueue({this.data, this.compare = defaultCompare}) {
-    data = data ?? [];
-    if (data!.isNotEmpty) {
-      for (var i = (data!.length >> 1) - 1; i >= 0; i--) {
+  TinyQueue(List<T> list, {this.compare = defaultCompare}) {
+    _data = List.of(list, growable: true);
+    if (_data.isNotEmpty) {
+      for (var i = (_data.length >> 1) - 1; i >= 0; i--) {
         _down(i);
       }
     }
   }
 
   push(item) {
-    data!.add(item);
-    _up(data!.length - 1);
+    _data.add(item);
+    _up(_data.length - 1);
   }
 
-  pop() {
-    if (data!.isEmpty) return; // return undefined
+  T? pop() {
+    if (_data.isEmpty) {
+      return null;
+    } // return undefined
 
-    var top = data![0];
-    var bottom = data!.removeLast();
+    var top = _data[0];
+    var bottom = _data.removeLast();
 
-    if (data!.isNotEmpty) {
-      data![0] = bottom;
+    if (_data.isNotEmpty) {
+      _data[0] = bottom;
       _down(0);
     }
 
@@ -31,47 +33,50 @@ class TinyQueue {
   }
 
   peek() {
-    return data![0];
+    return _data[0];
   }
 
-  _up(pos) {
-    var item = data![pos];
+  void _up(pos) {
+    var item = _data[pos];
 
     while (pos > 0) {
       var parent = (pos - 1) >> 1;
-      var current = data![parent];
+      var current = _data[parent];
       if (compare(item, current) >= 0) break;
-      data![pos] = current;
+      _data[pos] = current;
       pos = parent;
     }
 
-    data![pos] = item;
+    _data[pos] = item;
   }
 
-  _down(pos) {
+  void _down(pos) {
     //divides by two, and throws out the remainder. 15 >> 1 = 7
-    var halfLength = data!.length >> 1;
-    var item = data![pos];
+    var halfLength = _data.length >> 1;
+    var item = _data[pos];
 
     while (pos < halfLength) {
       // multiplies by two.
       var bestChild = (pos << 1) + 1; // initially it is the left child
       var right = bestChild + 1;
 
-      if (right < data!.length && compare(data![right], data![bestChild]) < 0) {
+      if (right < _data.length && compare(_data[right], _data[bestChild]) < 0) {
         bestChild = right;
       }
-      if (compare(data![bestChild], item) >= 0) break;
+      if (compare(_data[bestChild], item) >= 0) break;
 
-      data![pos] = data![bestChild];
+      _data[pos] = _data[bestChild];
       pos = bestChild;
     }
 
-    data![pos] = item;
+    _data[pos] = item;
   }
+
+  @override
+  Iterator get iterator => _data.iterator;
 }
 
-defaultCompare(a, b) {
+int defaultCompare(a, b) {
   return a < b
       ? -1
       : a > b
