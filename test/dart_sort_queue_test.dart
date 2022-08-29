@@ -6,6 +6,11 @@ void main() {
   group(
     'A group of tests',
     () {
+      _comparator(a, b) => a < b
+          ? -1
+          : a > b
+              ? 1
+              : 0;
       final data = [];
       for (var i = 0; i < 10; i++) {
         data.add((10 * math.Random().nextDouble()).floor());
@@ -15,7 +20,7 @@ void main() {
       test(
         'maintains a priority queue',
         () {
-          var queue = SortQueue<int>([]);
+          var queue = SortQueue<int>([], _comparator);
           for (var i = 0; i < data.length; i++) {
             queue.push(data[i]);
           }
@@ -33,7 +38,7 @@ void main() {
       test(
         'accepts data in constructor',
         () {
-          var queue = SortQueue<int>([...data]);
+          var queue = SortQueue<int>([...data], _comparator);
 
           var result = [];
           while (queue.isNotEmpty) {
@@ -47,7 +52,7 @@ void main() {
       test(
         'handles edge cases with few elements',
         () {
-          var queue = SortQueue<int>([]);
+          var queue = SortQueue<int>([], _comparator);
 
           queue.push(2);
           queue.push(1);
@@ -66,7 +71,7 @@ void main() {
       test(
         'handles init with empty array',
         () {
-          var queue = SortQueue([]);
+          var queue = SortQueue([], _comparator);
 
           expect(queue, equals([]));
         },

@@ -1,18 +1,10 @@
 class SortQueue<T> implements Iterable<T> {
   final List<T> _data;
-  late Comparator<T> _compare;
+  final Comparator<T> _compare;
 
-  /// uses a default comparator which assumes T is [int].
-  SortQueue(List<T> list, {Comparator<T>? compare})
-      : _data = List<T>.of(list, growable: true) {
-    _compare = compare ??
-        (T a, T b) {
-          return (a as int) < (b as int)
-              ? -1
-              : a > b
-                  ? 1
-                  : 0;
-        };
+  SortQueue(List<T> list, Comparator<T> compare)
+      : _data = List<T>.of(list, growable: true),
+        _compare = compare {
     if (_data.isNotEmpty) {
       for (var i = (_data.length >> 1) - 1; i >= 0; i--) {
         _down(i);
