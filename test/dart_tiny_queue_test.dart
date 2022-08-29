@@ -47,7 +47,7 @@ void main() {
       test(
         'handles edge cases with few elements',
         () {
-          var queue = TinyQueue([]);
+          var queue = TinyQueue<int>([]);
 
           queue.push(2);
           queue.push(1);
