@@ -15,7 +15,7 @@ void main() {
       test(
         'maintains a priority queue',
         () {
-          var queue = TinyQueue([]);
+          var queue = SortQueue([]);
           for (var i = 0; i < data.length; i++) {
             queue.push(data[i]);
           }
@@ -33,7 +33,7 @@ void main() {
       test(
         'accepts data in constructor',
         () {
-          var queue = TinyQueue([...data]);
+          var queue = SortQueue([...data]);
 
           var result = [];
           while (queue.isNotEmpty) {
@@ -47,7 +47,7 @@ void main() {
       test(
         'handles edge cases with few elements',
         () {
-          var queue = TinyQueue<int>([]);
+          var queue = SortQueue<int>([]);
 
           queue.push(2);
           queue.push(1);
@@ -65,7 +65,7 @@ void main() {
       test(
         'handles init with empty array',
         () {
-          var queue = TinyQueue([]);
+          var queue = SortQueue([]);
 
           expect(queue, equals([]));
         },
