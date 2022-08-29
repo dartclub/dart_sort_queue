@@ -2,7 +2,7 @@
 
 ```dart
 // create an empty priority queue
-var queue = TinyQueue();
+var queue = SortQueue();
 
 // add some items
 queue.push(7);
@@ -19,10 +19,10 @@ top = queue.peek(); // returns 7
 queue.length; // returns 2
 
 // create a priority queue from an existing array (modifies the array)
-queue = TinyQueue([7, 5, 10]);
+queue = SortQueue([7, 5, 10]);
 
 // pass a custom item comparator as a second argument
-queue = TinyQueue([{value: 5}, {value: 7}], (a, b) {
+queue = SortQueue([{value: 5}, {value: 7}], (a, b) {
 	return a.value - b.value;
 });
 
@@ -35,11 +35,11 @@ For a faster number-based queue, see [flatqueue](https://github.com/mourner/flat
 
 ### Install
 
-Install using pub for Dart (`dart pub add dart_tiny_queue`), or for Flutter (`flutter pub add dart_tiny_queue`) then:
+Install using pub for Dart (`dart pub add dart_sort_queue`), or for Flutter (`flutter pub add dart_sort_queue`) then:
 
 ```dart
 // import 
-import ' package:dart_tiny_queue.dart';
+import ' package:dart_sort_queue.dart';
 
 ```
 
