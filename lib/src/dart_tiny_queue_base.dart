@@ -1,4 +1,6 @@
-class TinyQueue<T> extends Iterable {
+import 'package:collection/collection.dart' as coll;
+
+class TinyQueue<T> extends Iterable<T> {
   late List<T> _data;
   final Function compare;
 
@@ -76,7 +78,7 @@ class TinyQueue<T> extends Iterable {
   Iterator get iterator => _data.iterator;
 }
 
-int defaultCompare(a, b) {
+Compar defaultCompare(a, b) {
   return a < b
       ? -1
       : a > b
