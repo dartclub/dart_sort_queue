@@ -1,4 +1,4 @@
-import 'package:dart_tiny_queue/dart_tiny_queue.dart';
+import 'package:dart_sort_queue/dart_sort_queue.dart';
 import 'package:test/test.dart';
 import 'dart:math' as math;
 
