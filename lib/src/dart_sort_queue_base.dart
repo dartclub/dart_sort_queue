@@ -1,10 +1,6 @@
-class SortQueue<T> implements Iterable<T> {
+class SortQueue<T extends Comparable<T>> implements Iterable<T> {
   final List<T> _data;
-  final Comparator<T> _compare;
-
-  SortQueue(List<T> list, Comparator<T> compare)
-      : _data = List<T>.of(list, growable: true),
-        _compare = compare {
+  SortQueue(List<T> list) : _data = List<T>.of(list, growable: true) {
     if (_data.isNotEmpty) {
       for (var i = (_data.length >> 1) - 1; i >= 0; i--) {
         _down(i);
@@ -42,7 +38,7 @@ class SortQueue<T> implements Iterable<T> {
     while (pos > 0) {
       var parent = (pos - 1) >> 1;
       var current = _data[parent];
-      if (_compare(item, current) >= 0) break;
+      if (item.compareTo(current) >= 0) break;
       _data[pos] = current;
       pos = parent;
     }
@@ -61,10 +57,10 @@ class SortQueue<T> implements Iterable<T> {
       var right = bestChild + 1;
 
       if (right < _data.length &&
-          _compare(_data[right], _data[bestChild]) < 0) {
+          _data[right].compareTo(_data[bestChild]) < 0) {
         bestChild = right;
       }
-      if (_compare(_data[bestChild], item) >= 0) break;
+      if (_data[bestChild].compareTo(item) >= 0) break;
 
       _data[pos] = _data[bestChild];
       pos = bestChild;
