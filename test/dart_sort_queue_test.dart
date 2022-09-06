@@ -6,13 +6,8 @@ void main() {
   group(
     'A group of tests',
     () {
-      _comparator(a, b) => a < b
-          ? -1
-          : a > b
-              ? 1
-              : 0;
       final data = [];
-      for (var i = 0; i < 10; i++) {
+      for (num i = 0; i < 10; i++) {
         data.add((10 * math.Random().nextDouble()).floor());
       }
       var sorted = [...data]..sort((a, b) => a - b);
@@ -20,7 +15,7 @@ void main() {
       test(
         'maintains a priority queue',
         () {
-          var queue = SortQueue<int>([], _comparator);
+          var queue = SortQueue<num>();
           for (var i = 0; i < data.length; i++) {
             queue.push(data[i]);
           }
@@ -38,7 +33,7 @@ void main() {
       test(
         'accepts data in constructor',
         () {
-          var queue = SortQueue<int>([...data], _comparator);
+          var queue = SortQueue<num>(list: [...data]);
 
           var result = [];
           while (queue.isNotEmpty) {
@@ -52,7 +47,7 @@ void main() {
       test(
         'handles edge cases with few elements',
         () {
-          var queue = SortQueue<int>([], _comparator);
+          var queue = SortQueue<num>();
 
           queue.push(2);
           queue.push(1);
@@ -61,8 +56,7 @@ void main() {
           queue.pop();
           queue.push(2);
           queue.push(1);
-          print(queue.pop() == 1);
-          //expect(queue.pop() == 1, isTrue);
+          expect(queue.pop() == 1, isTrue);
           expect(queue.pop() == 2, isTrue);
           expect(queue.pop() == null, isTrue);
         },
@@ -71,7 +65,7 @@ void main() {
       test(
         'handles init with empty array',
         () {
-          var queue = SortQueue([], _comparator);
+          var queue = SortQueue<num>();
 
           expect(queue, equals([]));
         },

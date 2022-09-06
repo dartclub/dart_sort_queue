@@ -1,6 +1,7 @@
 class SortQueue<T extends Comparable<T>> implements Iterable<T> {
-  final List<T> _data;
-  SortQueue(List<T> list) : _data = List<T>.of(list, growable: true) {
+  List<T> _data = <T>[];
+  SortQueue({List<T>? list}) {
+    _data = list ?? _data;
     if (_data.isNotEmpty) {
       for (var i = (_data.length >> 1) - 1; i >= 0; i--) {
         _down(i);
