@@ -3,7 +3,7 @@ class SortQueue<T extends Comparable<T>> implements Iterable<T> {
   SortQueue({List<T>? list}) {
     _data = list ?? _data;
     if (_data.isNotEmpty) {
-      for (var i = (_data.length >> 1) - 1; i >= 0; i--) {
+      for (int i = (_data.length >> 1) - 1; i >= 0; i--) {
         _down(i);
       }
     }
@@ -15,9 +15,8 @@ class SortQueue<T extends Comparable<T>> implements Iterable<T> {
   }
 
   T? pop() {
-    if (_data.isEmpty) {
-      return null;
-    }
+    if (_data.isEmpty) return null;
+
     var top = _data[0];
     var bottom = _data.removeLast();
 
@@ -49,13 +48,13 @@ class SortQueue<T extends Comparable<T>> implements Iterable<T> {
 
   void _down(pos) {
     //divides by two, and throws out the remainder. 15 >> 1 = 7
-    var halfLength = _data.length >> 1;
-    var item = _data[pos];
+    int halfLength = _data.length >> 1;
+    T item = _data[pos];
 
     while (pos < halfLength) {
       // multiplies by two.
-      var bestChild = (pos << 1) + 1; // initially it is the left child
-      var right = bestChild + 1;
+      int bestChild = (pos << 1) + 1; // initially it is the left child
+      int right = bestChild + 1;
 
       if (right < _data.length &&
           _data[right].compareTo(_data[bestChild]) < 0) {
