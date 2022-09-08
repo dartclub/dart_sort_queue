@@ -4,7 +4,7 @@ import 'package:dart_sort_queue/dart_sort_queue.dart';
 
 main() {
   // create a priority queue from an existing array (modifies the array)
-  dynamic queue = SortQueue<int>([7, 5, 10], (a, b) => a.compareTo(b));
+  SortQueue<num> queue = SortQueue<num>(list: [7, 5, 10]);
 
 // add some items
   queue.push(7);
@@ -21,13 +21,18 @@ main() {
   queue.length; // returns 2
 
 // pass a custom item comparator as a second argument
-  queue = SortQueue<Map<String, int>>([
-    {"value": 5},
-    {"value": 7}
-  ], (a, b) {
-    return (a["value"] ?? 0) - (b["value"] ?? 0);
-  });
+  SortQueue<CustomComparableItem> queue1 = SortQueue<CustomComparableItem>(
+      list: [CustomComparableItem(5), CustomComparableItem(7)]);
 
 // turn a queue into a sorted array
-  var list = queue.toList();
+  var list = queue1.toList();
+}
+
+class CustomComparableItem implements Comparable<CustomComparableItem> {
+  int? value;
+  CustomComparableItem(this.value);
+  @override
+  int compareTo(CustomComparableItem other) {
+    return (value ?? 0) - (other.value ?? 0);
+  }
 }
