@@ -53,17 +53,17 @@ class SortQueue<T extends Comparable<T>> implements Iterable<T> {
 
     while (pos < halfLength) {
       // multiplies by two.
-      int bestChild = (pos << 1) + 1; // initially it is the left child
-      int right = bestChild + 1;
+      int left = (pos << 1) + 1; // initially it is the left child
+      T bestChild = _data[left];
+      int right = left + 1;
 
-      if (right < _data.length &&
-          _data[right].compareTo(_data[bestChild]) < 0) {
-        bestChild = right;
+      if (right < _data.length && _data[right].compareTo(_data[right]) < 0) {
+        bestChild = _data[right];
       }
-      if (_data[bestChild].compareTo(item) >= 0) break;
+      if (bestChild.compareTo(item) >= 0) break;
 
-      _data[pos] = _data[bestChild];
-      pos = bestChild;
+      _data[pos] = bestChild;
+      pos = left;
     }
 
     _data[pos] = item;
