@@ -36,8 +36,8 @@ class SortQueue<T extends Comparable<T>> implements Iterable<T> {
     var item = _data[pos];
 
     while (pos > 0) {
-      var parent = (pos - 1) >> 1;
-      var current = _data[parent];
+      int parent = (pos - 1) >> 1;
+      T current = _data[parent];
       if (item.compareTo(current) >= 0) break;
       _data[pos] = current;
       pos = parent;

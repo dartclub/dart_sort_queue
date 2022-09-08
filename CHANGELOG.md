@@ -1,3 +1,5 @@
+## 0.0.2-2
+- better typing of the variables
 ## 0.0.2-1
 - bugfix in _down() 
 ## 0.0.2
