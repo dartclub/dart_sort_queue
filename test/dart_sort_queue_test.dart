@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:dart_sort_queue/dart_sort_queue.dart';
 import 'package:test/test.dart';
 import 'dart:math' as math;
@@ -7,11 +8,11 @@ void main() {
     'A group of tests',
     () {
       final data = [];
-      for (num i = 0; i < 10; i++) {
-        data.add((10 * math.Random().nextDouble()).floor());
+      for (num i = 0; i < 100; i++) {
+        int item = (100 * math.Random().nextDouble()).floor();
+        data.add(item);
       }
       var sorted = [...data]..sort((a, b) => a - b);
-
       test(
         'maintains a priority queue',
         () {
@@ -26,7 +27,7 @@ void main() {
             result.add(queue.pop());
           }
 
-          expect(result, equals(sorted));
+          expect(DeepCollectionEquality().equals(result, sorted), isTrue);
         },
       );
 
@@ -40,7 +41,7 @@ void main() {
             result.add(queue.pop());
           }
 
-          expect(result, equals(sorted));
+          expect(DeepCollectionEquality().equals(result, sorted), isTrue);
         },
       );
 
@@ -53,7 +54,7 @@ void main() {
           queue.push(1);
           queue.pop();
           queue.pop();
-          queue.pop();
+          queue.pop(); // returns null
           queue.push(2);
           queue.push(1);
           expect(queue.pop() == 1, isTrue);
