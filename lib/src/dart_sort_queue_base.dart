@@ -17,8 +17,8 @@ class SortQueue<T extends Comparable<T>> implements Iterable<T> {
   T? pop() {
     if (_data.isEmpty) return null;
 
-    var top = _data[0];
-    var bottom = _data.removeLast();
+    T top = _data[0];
+    T bottom = _data.removeLast();
 
     if (_data.isNotEmpty) {
       _data[0] = bottom;
@@ -54,15 +54,16 @@ class SortQueue<T extends Comparable<T>> implements Iterable<T> {
     while (pos < halfLength) {
       // multiplies by two.
       int left = (pos << 1) + 1; // initially it is the left child
-      T bestChild = _data[left];
+      T best = _data[left];
       int right = left + 1;
 
-      if (right < _data.length && _data[right].compareTo(_data[right]) < 0) {
-        bestChild = _data[right];
+      if (right < _data.length && _data[right].compareTo(best) < 0) {
+        left = right;
+        best = _data[right];
       }
-      if (bestChild.compareTo(item) >= 0) break;
+      if (best.compareTo(item) >= 0) break;
 
-      _data[pos] = bestChild;
+      _data[pos] = best;
       pos = left;
     }
 
