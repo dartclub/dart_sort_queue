@@ -1,6 +1,6 @@
 name: dart_sort_queue
 description: A tiny queue that sorts its items
-version: 0.0.2
+version: 0.0.2-1
 homepage: https://github.com/dartclub/dart_sort_queue
 
 environment:
